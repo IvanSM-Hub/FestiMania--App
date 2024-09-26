@@ -8,4 +8,8 @@ import java.util.List;
 
 @Repository
 public interface FestivalRepository extends MongoRepository<Festival, String> {
+
+    boolean existsFestivalByName( String name );
+    boolean existsFestivalBy_id( String id );
+
 }

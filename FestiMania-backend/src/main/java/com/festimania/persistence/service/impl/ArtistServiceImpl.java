@@ -56,7 +56,7 @@ public class ArtistServiceImpl implements ArtistService {
         try {
 
             if ( artistRepository.existsArtistByName(newArtist.getName()) )
-                throw new AttributeException("El Artista " + newArtist.getName() + " ya existe");
+                throw new Exception("El Artista " + newArtist.getName() + " ya existe");
             if ( newArtist.getName().isBlank() )
                 throw new AttributeException("El nombre del artista esta vacío");
 

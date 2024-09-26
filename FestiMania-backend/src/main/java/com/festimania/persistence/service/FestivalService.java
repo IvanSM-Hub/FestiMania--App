@@ -1,23 +1,27 @@
 package com.festimania.persistence.service;
 
-import com.festimania.entities.Festival;
-import com.festimania.utils.enums.GenreEnum;
+import com.festimania.entities.dto.FestivalCompleteDto;
+import com.festimania.entities.dto.FestivalDto;
+import com.festimania.exceptions.AttributeException;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 public interface FestivalService {
 
     // Finds
-    List<Festival> findAllFestivals();
-    List<Festival> findFestivalsByName(String name);
-    List<Festival> findFestivalsByDate(Date date);
-    List<Festival> findFestivalsByGenre(GenreEnum genre);
+    List<FestivalCompleteDto> findAllFestivals();
+    List<FestivalCompleteDto> findFestivalsById(String id);
+    List<FestivalCompleteDto> findFestivalsByName(String name);
+    List<FestivalCompleteDto> findFestivalsByDate(LocalDate date);
+    List<FestivalCompleteDto> findFestivalsByGenre(String genre);
 
     // Create
-    boolean createFestival(Festival festival);
+    FestivalCompleteDto createFestival(FestivalDto festivalDto) throws AttributeException;
 
     // Alter Festival
-    boolean alterFestival();
+    FestivalCompleteDto alterFestival();
+    FestivalCompleteDto addArtistToFestival(List<String> artistsIdList, String idFestival);
+
 
 }

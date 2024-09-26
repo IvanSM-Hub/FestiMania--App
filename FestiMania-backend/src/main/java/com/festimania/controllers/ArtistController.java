@@ -19,7 +19,7 @@ public class ArtistController {
 
     private final ArtistService artistService;
 
-    @PostMapping()
+    @PostMapping({"","/"})
     public ResponseEntity<Artist> highArtist( @RequestBody ArtistDto newArtist ) throws AttributeException {
         return ResponseEntity.ok(artistService.createArtist(newArtist));
     }

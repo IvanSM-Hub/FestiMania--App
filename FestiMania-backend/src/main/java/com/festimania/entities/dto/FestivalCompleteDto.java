@@ -1,30 +1,29 @@
-package com.festimania.entities;
+package com.festimania.entities.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.festimania.utils.enums.GenreEnum;
 import lombok.Builder;
 import lombok.Data;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDate;
 import java.util.List;
 
-@Builder
 @Data
-@Document(collection = "festivales")
-public class Festival {
+@Builder
+public class FestivalCompleteDto {
 
-    @Id
-    private String _id;
     private String name;
     private String description;
-    private GenreEnum genre;
+    private String genre;
+
     @JsonFormat(pattern = "yyyy/MM/dd")
     private LocalDate dateStart;
+
     @JsonFormat(pattern = "yyyy/MM/dd")
     private LocalDate dateEnd;
+
     private String location;
-    private List<String> artistsId;
+
+    private List<ArtistDto> artistsList;
 
 }

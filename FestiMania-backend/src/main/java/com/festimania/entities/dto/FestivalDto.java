@@ -12,8 +12,8 @@ public class FestivalDto {
     private String name;
     private String description;
     private String genre;
-    private Date dateStart;
-    private Date dateEnd;
+    private String dateStart;
+    private String dateEnd;
     private String location;
     private List<String> artistsId;
 
