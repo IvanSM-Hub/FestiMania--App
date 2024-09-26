@@ -11,18 +11,17 @@ public interface ArtistService {
 
     // finds
     List<Artist> findAllArtists();
-    List<Artist> findFestivalsByName(String name);
-    List<Artist> findFestivalsByGenre(GenreEnum genre);
-    Artist findByName(String name);
+    List<Artist> findArtistsByName(String name);
+    List<Artist> findArtistsByGenre(String genre) throws AttributeException;
     Artist findById(String id);
 
     // Create
     Artist createArtist(ArtistDto newArtist) throws AttributeException;
 
     // Alter
-    boolean alterArtist(ArtistDto changeArtist);
+    Artist updateArtist(String id, ArtistDto updateArtist) throws AttributeException;
 
     // Delete
-    boolean deleteArtist(String idArtist);
+    boolean deleteArtist(String id);
 
 }
