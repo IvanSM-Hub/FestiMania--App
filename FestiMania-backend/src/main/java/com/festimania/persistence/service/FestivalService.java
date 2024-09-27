@@ -11,17 +11,18 @@ public interface FestivalService {
 
     // Finds
     List<FestivalCompleteDto> findAllFestivals();
-    List<FestivalCompleteDto> findFestivalsById(String id);
+    FestivalCompleteDto findFestivalsById(String id);
     List<FestivalCompleteDto> findFestivalsByName(String name);
-    List<FestivalCompleteDto> findFestivalsByDate(LocalDate date);
-    List<FestivalCompleteDto> findFestivalsByGenre(String genre);
+    List<FestivalCompleteDto> findFestivalsByDate(String date);
+    List<FestivalCompleteDto> findFestivalsByGenre(String genre) throws AttributeException;
 
     // Create
     FestivalCompleteDto createFestival(FestivalDto festivalDto) throws AttributeException;
 
     // Alter Festival
-    FestivalCompleteDto alterFestival();
-    FestivalCompleteDto addArtistToFestival(List<String> artistsIdList, String idFestival);
+    FestivalCompleteDto alterFestival(String id, FestivalDto updateFestival) throws AttributeException;
 
+    // Delete Festival
+    boolean deleteFestival(String id);
 
 }

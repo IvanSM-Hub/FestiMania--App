@@ -1,6 +1,5 @@
 package com.festimania.controllers;
 
-import com.festimania.entities.Artist;
 import com.festimania.entities.dto.FestivalCompleteDto;
 import com.festimania.entities.dto.FestivalDto;
 import com.festimania.exceptions.AttributeException;
@@ -10,7 +9,6 @@ import lombok.Data;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
 import java.util.List;
 
 @Data
@@ -32,7 +30,7 @@ public class FestivalController {
             @RequestParam(required = false) String _id,
             @RequestParam(required = false) String name,
             @RequestParam(required = false) String genre,
-            @RequestParam(required = false)LocalDate date
+            @RequestParam(required = false) String date
             ) throws ObjectNotFoundException, AttributeException {
 
         if (_id != null)
@@ -45,13 +43,26 @@ public class FestivalController {
             return ResponseEntity.ok(festivalService.findFestivalsByDate(date));
         else
             throw new ObjectNotFoundException(
-                    "Debes proporcionar un _id, un nombre o un genero musical parabuscar el artista."
+                    "Debes proporcionar un _id, un nombre, un genero músical o una fecha para buscar el festival."
             );
     }
 
     @GetMapping({"", "/"})
     public ResponseEntity<List<FestivalCompleteDto>> findAllArtists() throws ObjectNotFoundException {
         return ResponseEntity.ok(festivalService.findAllFestivals());
+    }
+
+    @PutMapping("/update")
+    public ResponseEntity<FestivalCompleteDto> updateFestival(
+            @RequestParam String _id,
+            @RequestBody FestivalDto updateFestival
+    ) throws AttributeException {
+        return ResponseEntity.ok( festivalService.alterFestival(_id, updateFestival) );
+    }
+
+    @DeleteMapping("/delete")
+    public ResponseEntity<Boolean> deleteFestival(@RequestParam String _id) {
+        return ResponseEntity.ok(festivalService.deleteFestival(_id));
     }
 
 }

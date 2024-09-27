@@ -30,7 +30,6 @@ public class ArtistServiceImpl implements ArtistService {
     @Override
     public List<Artist> findArtistsByName(String name) {
         List<Artist> artists = artistRepository.findByNameContainingIgnoreCase(name);
-        System.out.println(artists);
         if (artists.isEmpty())
             throw new ObjectNotFoundException("No se encontraron artistas con el nombre: " + name);
         return artists;
