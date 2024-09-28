@@ -12,16 +12,12 @@ import com.festimania.utils.IdGenerator;
 import com.festimania.utils.enums.GenreEnum;
 import lombok.Data;
 import org.springframework.data.mongodb.core.MongoTemplate;
-import org.springframework.data.mongodb.core.query.Criteria;
-import org.springframework.data.mongodb.core.query.Query;
-import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Objects;
-import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 @Data
@@ -32,7 +28,10 @@ public class FestivalServiceImpl implements FestivalService {
     private final MongoTemplate mongoTemplate;
     private final ClassMapper classMapper;
 
-
+    /**
+     * Busca todos los festivales en la base de datos.
+     * @return Lista con todos los festivales encontrados.
+     */
     @Override
     public List<FestivalCompleteDto> findAllFestivals() {
         return mongoTemplate.findAll(Festival.class).stream()
@@ -40,6 +39,12 @@ public class FestivalServiceImpl implements FestivalService {
                 .collect(Collectors.toList());
     }
 
+    /**
+     * Busca un festival en la base de datos.
+     * @param id Identificador del festival a buscar.
+     * @return Objeto Festival encontrado.
+     * @throws ObjectNotFoundException Si no se encuentra ningun festival con el id proporcionado.
+     */
     @Override
     public FestivalCompleteDto findFestivalsById(String id) {
         if ( !festivalRepository.existsFestivalBy_id(id) )
@@ -47,6 +52,12 @@ public class FestivalServiceImpl implements FestivalService {
         return classMapper.toFestivalCompleteDto( Objects.requireNonNull(mongoTemplate.findById(id, Festival.class)) );
     }
 
+    /**
+     * Busca un festival en la base de datos.
+     * @param name Nombre del festival a buscar.
+     * @return Lista con los festivales encontrados.
+     * @throws ObjectNotFoundException Si no se encuentra ningun festival con el nombre proporcionado.
+     */
     @Override
     public List<FestivalCompleteDto> findFestivalsByName(String name) {
         String nameDepurated = name.replace('_',' ');
@@ -58,6 +69,11 @@ public class FestivalServiceImpl implements FestivalService {
                 .collect(Collectors.toList());
     }
 
+    /**
+     * Busca un festival en la base de datos.
+     * @param date Fecha del festival a buscar.
+     * @return Lista con los festivales encontrados.
+     */
     @Override
     public List<FestivalCompleteDto> findFestivalsByDate(String date) {
 
@@ -71,6 +87,12 @@ public class FestivalServiceImpl implements FestivalService {
                 .collect(Collectors.toList());
     }
 
+    /**
+     * Busca un festival en la base de datos.
+     * @param genre Genero musical del festival a buscar.
+     * @return Lista con los festivales encontrados.
+     * @throws AttributeException Si no se encuentra ningun festival con el genero proporcionado.
+     */
     @Override
     public List<FestivalCompleteDto> findFestivalsByGenre(String genre) throws AttributeException {
         List<Festival> festivalList = festivalRepository.findFestivalsByGenre(GenreEnum.convertStringToGenreEnum(genre));
@@ -82,6 +104,12 @@ public class FestivalServiceImpl implements FestivalService {
                 .collect(Collectors.toList());
     }
 
+    /**
+     * Crea un nuevo festival en la base de datos.
+     * @param newFestival Objeto de tipo FestivalDto que contiene los datos del nuevo festival.
+     * @return Objeto Festival creado.
+     * @throws AttributeException Si alguno de los atributos del nuevo festival no es valido.
+     */
     @Override
     public FestivalCompleteDto createFestival(FestivalDto newFestival) throws AttributeException {
         try {
@@ -119,6 +147,13 @@ public class FestivalServiceImpl implements FestivalService {
 
     }
 
+    /**
+     * Actualiza los datos de un festival en la base de datos.
+     * @param id Identificador del festival a actualizar.
+     * @param updateFestival Objeto de tipo FestivalDto que contiene los datos actualizados del festival.
+     * @return Objeto Festival actualizado.
+     * @throws AttributeException Si alguno de los atributos del festival a actualizar no es valido.
+     */
     @Override
     public FestivalCompleteDto alterFestival(String id, FestivalDto updateFestival) throws AttributeException {
 
@@ -157,6 +192,12 @@ public class FestivalServiceImpl implements FestivalService {
         return classMapper.toFestivalCompleteDto(festival);
     }
 
+    /**
+     * Elimina un festival de la base de datos.
+     * @param id Identificador del festival a eliminar.
+     * @return True si se ha eliminado el festival.
+     * @throws ObjectNotFoundException Si no se encuentra ningun festival con el id proporcionado.
+     */
     @Override
     public boolean deleteFestival(String id) {
         Festival festival = mongoTemplate.findById(id, Festival.class);

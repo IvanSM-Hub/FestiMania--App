@@ -1,13 +1,15 @@
 package com.festimania.entities.dto;
 
 import com.festimania.utils.SocialMedia;
-import com.festimania.utils.enums.CountryEnum;
-import com.festimania.utils.enums.GenreEnum;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Builder
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class ArtistDto {
 
     private String name;

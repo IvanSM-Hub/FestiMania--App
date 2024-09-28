@@ -17,6 +17,11 @@ public class ClassMapper {
 
     private final ArtistService artistService;
 
+        /**
+         * Mapea un objeto de tipo Festival a un objeto de tipo FestivalCompleteDto.
+         * @param festival Objeto de tipo Festival a mapear.
+         * @return Objeto de tipo FestivalCompleteDto mapeado.
+         */
     public FestivalCompleteDto toFestivalCompleteDto(Festival festival) {
         List<Artist> artistsList = festival.getArtistsId().stream()
                 .map(artistService::findById)
@@ -37,6 +42,11 @@ public class ClassMapper {
                 .build();
     }
 
+        /**
+         * Mapea un objeto de tipo Artist a un objeto de tipo ArtistDto.
+         * @param artist Objeto de tipo Artist a mapear.
+         * @return Objeto de tipo ArtistDto mapeado.
+         */
     public ArtistDto toArtistDto(Artist artist) {
         return ArtistDto.builder()
                 .name(artist.getName())

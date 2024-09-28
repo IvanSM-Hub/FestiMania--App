@@ -3,14 +3,17 @@ package com.festimania.entities;
 import com.festimania.utils.SocialMedia;
 import com.festimania.utils.enums.CountryEnum;
 import com.festimania.utils.enums.GenreEnum;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.validation.annotation.Validated;
 
 @Builder
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Document(collection = "artistas")
 public class Artist {
 

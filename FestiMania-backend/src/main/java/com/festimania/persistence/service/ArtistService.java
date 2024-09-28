@@ -3,7 +3,6 @@ package com.festimania.persistence.service;
 import com.festimania.entities.Artist;
 import com.festimania.entities.dto.ArtistDto;
 import com.festimania.exceptions.AttributeException;
-import com.festimania.utils.enums.GenreEnum;
 
 import java.util.List;
 

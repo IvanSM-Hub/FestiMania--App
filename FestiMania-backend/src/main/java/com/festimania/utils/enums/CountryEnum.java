@@ -22,6 +22,12 @@ public enum CountryEnum {
     ITALIA,
     SUDÁFRICA;
 
+    /**
+     * Convierte un String en un CountryEnum.
+     * @param countryString String a convertir.
+     * @return CountryEnum.
+     * @throws AttributeException Si el String no es un CountryEnum válido.
+     */
     public static CountryEnum convertStringToCountryEnum(String countryString) throws AttributeException {
         if (countryString == null || countryString.isEmpty()) {
             throw new AttributeException("Género no válido: " + countryString);

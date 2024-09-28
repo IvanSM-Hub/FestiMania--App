@@ -9,8 +9,8 @@ public class IdGenerator {
     private static final int LENGTH = 9;
 
     /**
-     * Método para generar un id aleatorio
-     * @return String
+     * Genera un identificador aleatorio.
+     * @return Identificador aleatorio.
      */
     public static String generateId() {
         StringBuilder sb = new StringBuilder(LENGTH);

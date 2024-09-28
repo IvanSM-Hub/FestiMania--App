@@ -4,7 +4,6 @@ import com.festimania.entities.dto.FestivalCompleteDto;
 import com.festimania.entities.dto.FestivalDto;
 import com.festimania.exceptions.AttributeException;
 
-import java.time.LocalDate;
 import java.util.List;
 
 public interface FestivalService {
